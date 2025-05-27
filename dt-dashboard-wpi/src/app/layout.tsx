@@ -27,12 +27,12 @@ export default function RootLayout({
     fetchSimulations().then(() => setLoading(false));
   }, []);
 
-  useEffect(() => {
-    if (!loading) {
-      const id = startSimulationsUpdateLoop();
-      return () => stopSimulationsUpdateLoop(id);
-    }
-  }, [loading]);
+//   useEffect(() => {
+//     if (!loading) {
+//       const id = startSimulationsUpdateLoop();
+//       return () => stopSimulationsUpdateLoop(id);
+//     }
+//   }, [loading]);
 
   return (
     <html lang="en">
