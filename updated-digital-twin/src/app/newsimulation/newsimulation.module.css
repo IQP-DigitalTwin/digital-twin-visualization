@@ -1,0 +1,135 @@
+.container {
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 3rem;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.section {
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: #f8f9fc;
+  border-radius: 16px;
+  border: 1px solid #edf2f7;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #000;
+  margin-bottom: 2rem;
+  letter-spacing: -0.025em;
+}
+
+.sectionTitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.025em;
+}
+
+.modeTitle {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 1rem;
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 0.75rem;
+  color: #2d3748;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.formGroup input {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  color: #1a1a1a;
+}
+
+.formGroup input:focus {
+  border-color: #0070f3;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.1);
+}
+
+.modeSection {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #edf2f7;
+}
+
+.fileUpload {
+  border: 2px dashed #e2e8f0;
+  padding: 3rem;
+  text-align: center;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.fileUpload:hover {
+  border-color: #0070f3;
+  background: rgba(0, 112, 243, 0.02);
+}
+
+.fileUploadText {
+  color: #2d3748;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+.buttons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: flex-end;
+  margin-top: 3rem;
+}
+
+.cancelBtn, .launchBtn {
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cancelBtn {
+  background: #f1f5f9;
+  color: #000;
+  border: 2px solid #e2e8f0;
+}
+
+.launchBtn {
+  background: #0070f3;
+  color: white;
+  border: none;
+}
+
+.cancelBtn:hover {
+  background: #e2e8f0;
+}
+
+.launchBtn:hover {
+  background: #0051b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 112, 243, 0.2);
+}
