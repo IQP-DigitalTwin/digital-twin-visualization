@@ -1,4 +1,4 @@
-AGENT;ID;AGE;SEXE;AGE4T;PROF;RS4;HABITAT;Revenu;CP;POIDS;PROF;RS4;probinf;probsup
+AGENT;ID;AGE;SEXE;AGE4T;PROF;RS4;HABITAT;Revenu;CP;POI  DS;PROF;RS4;probinf;probsup
 AG2420;62297;22;Femme;<30 ans;Agriculteur, exploitant;Non;Appartement;4;75001;1,03546;1;0;0.5;0.5
 AG2264;62138;26;Femme;<30 ans;Autre inactif;Non;Appartement;1;67350;1,21463;9;0;0.5;0.5
 AG2374;62236;24;Femme;<30 ans;Autre inactif;Non;Appartement;1;29200;1,228906;9;0;0.5;0.5

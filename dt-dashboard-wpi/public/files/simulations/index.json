@@ -1,0 +1,54 @@
+{
+  "simulations": [
+    {
+      "id": "bcc883bc-ba97-487c-965d-83831ae6a2cc",
+      "name": "Test",
+      "initial_population": {
+        "file": "default.csv",
+        "day": "2023-02-15",
+        "week": 7,
+        "department": "63"
+      },
+      "properties": {
+        "mode": 0,
+        "final_population_number": 26000,
+        "temperature_sensibility": 1,
+        "climat_sensibility": 1,
+        "cut_week_number": 7,
+        "temperature_target": 12.8,
+        "duration": 1,
+        "seed": 611
+      },
+      "status": "Done",
+      "message": "Finalisation de la simulation",
+      "lastTaskId": 1327436843957892600,
+      "createdAt": "2025-05-27T11:46:54.000Z",
+      "updatedAt": "2025-05-27T11:47:04.000Z"
+    },
+    {
+      "id": "f7bb78f2-02df-4b82-bdc8-c0676bcf8531",
+      "name": "Balls Test",
+      "initial_population": {
+        "file": "default.csv",
+        "day": "2023-02-15",
+        "week": 7,
+        "department": "63"
+      },
+      "properties": {
+        "mode": 0,
+        "final_population_number": 26000,
+        "temperature_sensibility": 1,
+        "climat_sensibility": 1,
+        "cut_week_number": 7,
+        "temperature_target": 12.8,
+        "duration": 1,
+        "seed": 693
+      },
+      "status": "Done",
+      "message": "Finalisation de la simulation",
+      "lastTaskId": 9048372378805275000,
+      "createdAt": "2025-05-27T13:10:22.000Z",
+      "updatedAt": "2025-05-27T13:10:38.000Z"
+    }
+  ]
+}
