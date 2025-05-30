@@ -1,4 +1,4 @@
-// File: /Users/alexli/Library/CloudStorage/OneDrive-WorcesterPolytechnicInstitute(wpi.edu)/IQP STUFF/Final Project/Digital_Twin_Vis/Our_Stuff/src/app/page.tsx
+// File: /Users/alexli/Library/CloudStorage/OneDrive-WorcesterPolytechnicInstitute(wpi.edu)/IQP STUFF/Final Project/Digital-Twin-Visualization/Our-stuff/src/app/page.tsx
 import * as entry from '../../../src/app/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
