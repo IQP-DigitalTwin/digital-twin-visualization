@@ -1,0 +1,11 @@
+.sidebarItem {
+  padding: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.sidebarItem:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ...existing styles... */
