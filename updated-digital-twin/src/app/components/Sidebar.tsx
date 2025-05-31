@@ -64,25 +64,48 @@ export default function Sidebar() {
 
       <style jsx>{`
         .sidebar {
-          width: ${isExpanded ? '250px' : '80px'};
+          position: relative;
           height: 95vh;
-          background-color: #1e293b;
-          color: white;
+          background: white;
+          color: #2d3748;
           padding: 1rem;
-          transition: all 0.4s ease-in-out;
+          width: 80px;
           position: relative;
           z-index: 100;
           border-radius: 0 24px 24px 0;
           margin: 16px 0;
           margin-left: 8px;
+          box-shadow: 4px 0 12px rgba(0, 0, 0, 0.05);
+          transform-origin: left;
+          transition: width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+          will-change: width;
+          overflow-x: hidden;
         }
         
-        .sidebar:hover {
-          box-shadow: 4px 0 12px rgba(0, 0, 0, 0.15);
+        .sidebar.expanded {
+          width: 250px;
         }
 
-        .sidebarItem {
-          color: white;
+        nav span {
+          white-space: nowrap;
+          opacity: 0;
+          transition: opacity 0.1s ease;
+        }
+
+        .sidebar.expanded nav span {
+          opacity: 1;
+          transition-delay: 0.1s;
+        }
+
+        nav svg {
+          min-width: 24px;
+          font-size: 24px;
+          transition: none;
+        }
+
+        .sidebarItem,
+        nav a {
+          color: #2d3748;
           text-decoration: none;
           font-size: 16px;
           display: flex;
@@ -90,13 +113,13 @@ export default function Sidebar() {
           padding: 12px;
           border-radius: 12px;
           gap: 16px;
-          transition: all 0.4s ease;
-          cursor: pointer;
-          margin-bottom: 12px;
+          transition: background-color 0.2s ease;
+          white-space: nowrap;
         }
 
-        .sidebarItem:hover {
-          background-color: rgba(255,255,255,0.1);
+        .sidebarItem:hover,
+        nav a:hover {
+          background-color: #f7fafc;
           transform: translateX(4px);
         }
 
@@ -107,36 +130,7 @@ export default function Sidebar() {
         }
 
         nav li {
-          margin: 12px 0;
-        }
-
-        nav a {
-          color: white;
-          text-decoration: none;
-          font-size: 16px;
-          display: flex;
-          align-items: center;
-          padding: 12px;
-          border-radius: 12px;
-          gap: 16px;
-          transition: all 0.4s ease;
-        }
-
-        nav a:hover {
-          background-color: rgba(255,255,255,0.1);
-          transform: translateX(4px);
-        }
-
-        nav svg {
-          font-size: ${isExpanded ? '20px' : '28px'};
-          min-width: ${isExpanded ? '20px' : '28px'};
-          transition: all 0.4s ease;
-        }
-
-        nav span {
-          white-space: nowrap;
-          opacity: ${isExpanded ? '1' : '0'};
-          transition: opacity 0.4s ease;
+          margin: 8px 0;
         }
       `}</style>
     </div>
