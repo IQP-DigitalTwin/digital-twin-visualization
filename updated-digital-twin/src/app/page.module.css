@@ -1,20 +1,17 @@
 .container {
   display: flex;
   min-height: 100vh;
-  background: linear-gradient(135deg, #1a1c2c 0%, #2a4858 100%);
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f3 100%);
 }
 
 .mainContent {
   flex: 1;
   padding: 2rem;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  color: #2d3748;
 }
 
 .mainContent h1 {
-  color: white;
+  color: #2d3748;
   font-size: 2.5rem;
   margin-bottom: 2rem;
 }
@@ -23,52 +20,47 @@
   padding: 12px 24px;
   border: none;
   border-radius: 8px;
-  background: linear-gradient(90deg, #00b4db 0%, #0083b0 100%);
+  background: linear-gradient(90deg, #4299e1 0%, #3182ce 100%);
   color: white;
   font-weight: bold;
   cursor: pointer;
-  transition: transform 0.2s;
-  margin: 20px auto;
-  display: block;
-  width: fit-content;
+  transition: all 0.2s;
+  box-shadow: 0 4px 6px rgba(66, 153, 225, 0.2);
 }
 
 .newSimulationBtn:hover {
   transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(66, 153, 225, 0.3);
 }
 
 .dashboardGrid {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   gap: 2rem;
   margin-top: 2rem;
-  width: 100%;
 }
 
 .dashboardCard {
   flex: 1;
-  min-width: 300px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
-  backdrop-filter: blur(10px);
+  background: white;
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  transition: transform 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s;
+  border: 1px solid rgba(226, 232, 240, 0.8);
 }
 
 .dashboardCard:hover {
   transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
 }
 
 .dashboardCard h2 {
-  color: #00b4db;
+  color: #2d3748;
   margin-bottom: 1rem;
 }
 
 .dashboardCard p {
-  color: #e0e0e0;
+  color: #718096;
   line-height: 1.5;
 }
 
