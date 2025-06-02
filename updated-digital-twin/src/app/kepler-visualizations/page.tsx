@@ -12,9 +12,9 @@ export default function KeplerVisualizations() {
           src="/kepler.gl.html"
           style={{
             width: '100%',
-            height: 'calc(100vh - 100px)', // Adjust height to account for header
-            border: 'none',
-            borderRadius: '12px',
+            height: 'calc(100vh - 100px)',
+            border: '10px',
+            borderRadius: '20px',
             marginTop: '20px'
           }}
         />
