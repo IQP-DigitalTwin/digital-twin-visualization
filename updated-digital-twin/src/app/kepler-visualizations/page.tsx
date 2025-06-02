@@ -8,10 +8,16 @@ export default function KeplerVisualizations() {
       <Sidebar />
       <main className={styles.mainContent}>
         <h1>Kepler.gl Map Visualizations</h1>
-        <div className={styles.comingSoon}>
-          <h2>Coming Soon</h2>
-          <p>This feature is currently under development. I'm tired, will work some other day...........</p>
-        </div>
+        <iframe 
+          src="/kepler.gl.html"
+          style={{
+            width: '100%',
+            height: 'calc(100vh - 100px)', // Adjust height to account for header
+            border: 'none',
+            borderRadius: '12px',
+            marginTop: '20px'
+          }}
+        />
       </main>
     </div>
   );
