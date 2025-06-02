@@ -1,7 +1,7 @@
 "use client";
 import { useState } from 'react';
 import { 
-  MdDashboard, 
+  MdHome, 
   MdPlayCircle, 
   MdInsights, 
   MdSettings, 
@@ -30,34 +30,34 @@ export default function Sidebar() {
       <nav>
         <ul>
           <li>
-            <a href="/dashboard">
-              <MdDashboard />
-              {isExpanded && <span>Dashboard</span>}
-            </a>
+            <div className="sidebarItem" onClick={() => router.push('/')}>
+              <MdHome />
+              {isExpanded && <span>Home</span>}
+            </div>
           </li>
           <li>
-            <a href="/simulations">
+            <div className="sidebarItem" onClick={() => router.push('/simulations')}>
               <MdPlayCircle />
               {isExpanded && <span>Simulations</span>}
-            </a>
+            </div>
           </li>
           <li>
-            <a href="/analytics">
+            <div className="sidebarItem" onClick={() => router.push('/analytics')}>
               <MdInsights />
               {isExpanded && <span>Analytics</span>}
-            </a>
+            </div>
           </li>
           <li>
-            <a href="/settings">
+            <div className="sidebarItem" onClick={() => router.push('/settings')}>
               <MdSettings />
               {isExpanded && <span>Settings</span>}
-            </a>
+            </div>
           </li>
           <li>
-            <a href="/help">
+            <div className="sidebarItem" onClick={() => router.push('/help')}>
               <MdHelp />
               {isExpanded && <span>Help</span>}
-            </a>
+            </div>
           </li>
         </ul>
       </nav>
