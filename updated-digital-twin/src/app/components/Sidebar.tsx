@@ -24,7 +24,7 @@ export default function Sidebar() {
         onClick={() => router.push('/')}
       >
         <MdHome className="min-w-6 text-2xl" />
-        {isExpanded && <span className="whitespace-nowrap opacity-0 transition-opacity delay-100 duration-100 ${isExpanded ? 'opacity-100' : ''}">Home</span>}
+        {isExpanded && <span className={`whitespace-nowrap transition-opacity delay-100 duration-100 ${isExpanded ? 'opacity-100' : 'opacity-0'}`}>Home</span>}
       </div>
 
       <nav className="mt-8">
@@ -32,25 +32,25 @@ export default function Sidebar() {
           <li>
             <div className="cursor-pointer p-3 rounded-xl hover:bg-gray-100 transition-colors flex items-center gap-4" onClick={() => router.push('/simulations')}>
               <MdPlayCircle className="min-w-6 text-2xl" />
-              {isExpanded && <span className="whitespace-nowrap opacity-0 transition-opacity delay-100 duration-100 ${isExpanded ? 'opacity-100' : ''}">Simulations</span>}
+              {isExpanded && <span className={`whitespace-nowrap transition-opacity delay-100 duration-100 ${isExpanded ? 'opacity-100' : 'opacity-0'}`}>Simulations</span>}
             </div>
           </li>
           <li>
             <div className="cursor-pointer p-3 rounded-xl hover:bg-gray-100 transition-colors flex items-center gap-4" onClick={() => router.push('/analytics')}>
               <MdInsights className="min-w-6 text-2xl" />
-              {isExpanded && <span className="whitespace-nowrap opacity-0 transition-opacity delay-100 duration-100 ${isExpanded ? 'opacity-100' : ''}">Analytics</span>}
+              {isExpanded && <span className={`whitespace-nowrap transition-opacity delay-100 duration-100 ${isExpanded ? 'opacity-100' : 'opacity-0'}`}>Analytics</span>}
             </div>
           </li>
           <li>
             <div className="cursor-pointer p-3 rounded-xl hover:bg-gray-100 transition-colors flex items-center gap-4" onClick={() => router.push('/settings')}>
               <MdSettings className="min-w-6 text-2xl" />
-              {isExpanded && <span className="whitespace-nowrap opacity-0 transition-opacity delay-100 duration-100 ${isExpanded ? 'opacity-100' : ''}">Settings</span>}
+              {isExpanded && <span className={`whitespace-nowrap transition-opacity delay-100 duration-100 ${isExpanded ? 'opacity-100' : 'opacity-0'}`}>Settings</span>}
             </div>
           </li>
           <li>
             <div className="cursor-pointer p-3 rounded-xl hover:bg-gray-100 transition-colors flex items-center gap-4" onClick={() => router.push('/help')}>
               <MdHelp className="min-w-6 text-2xl" />
-              {isExpanded && <span className="whitespace-nowrap opacity-0 transition-opacity delay-100 duration-100 ${isExpanded ? 'opacity-100' : ''}">Help</span>}
+              {isExpanded && <span className={`whitespace-nowrap transition-opacity delay-100 duration-100 ${isExpanded ? 'opacity-100' : 'opacity-0'}`}>Help</span>}
             </div>
           </li>
         </ul>
