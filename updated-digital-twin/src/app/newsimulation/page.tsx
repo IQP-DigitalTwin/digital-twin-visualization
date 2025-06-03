@@ -1,5 +1,6 @@
 "use client";
 import { useState } from 'react';
+import Sidebar from '../components/Sidebar';
 
 export default function NewSimulation() {
   const [simName, setSimName] = useState('');
@@ -9,88 +10,113 @@ export default function NewSimulation() {
   const [file, setFile] = useState<File | null>(null);
 
   return (
-    <div className="container mx-auto p-8 max-w-4xl">
-      <h1 className="text-3xl font-bold mb-8 text-white">Simulation Information</h1>
-      
-      <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-        <h2 className="text-xl font-semibold mb-4 text-white">General</h2>
-        <div className="mb-4">
-          <label className="block text-gray-300 mb-2">Simulation Name</label>
-          <input 
-            type="text" 
-            value={simName}
-            onChange={(e) => setSimName(e.target.value)}
-            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-blue-500 focus:outline-none"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-300 mb-2">Target Population Size</label>
-          <input 
-            type="number" 
-            value={targetPopulation}
-            onChange={(e) => setTargetPopulation(e.target.value)}
-            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-blue-500 focus:outline-none"
-          />
-        </div>
-      </div>
+    <div className="flex min-h-screen bg-gray-900">
+      <Sidebar />
+      <div className="flex-1 p-8 ml-64"> {/* ml-64 accounts for sidebar width */}
+        <div className="max-w-7xl mx-auto">
+          <h1 className="text-4xl font-bold mb-12 text-white border-b border-gray-700 pb-4">
+            Create New Simulation
+          </h1>
+          
+          <div className="flex flex-wrap gap-6">
+            {/* Left Column */}
+            <div className="flex-1 min-w-[400px]">
+              <div className="bg-gray-800/50 rounded-lg p-6 mb-6 backdrop-blur-sm">
+                <h2 className="text-2xl font-semibold mb-6 text-white">General Settings</h2>
+                <div className="space-y-6">
+                  <div>
+                    <label className="block text-gray-300 mb-2 text-sm">Simulation Name</label>
+                    <input 
+                      type="text" 
+                      value={simName}
+                      onChange={(e) => setSimName(e.target.value)}
+                      className="w-full p-3 rounded-lg bg-gray-700/50 text-white border border-gray-600 focus:border-blue-500 focus:outline-none"
+                      placeholder="Enter simulation name"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-gray-300 mb-2 text-sm">Target Population Size</label>
+                    <input 
+                      type="number" 
+                      value={targetPopulation}
+                      onChange={(e) => setTargetPopulation(e.target.value)}
+                      className="w-full p-3 rounded-lg bg-gray-700/50 text-white border border-gray-600 focus:border-blue-500 focus:outline-none"
+                    />
+                  </div>
+                </div>
+              </div>
 
-      <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-        <h2 className="text-xl font-semibold mb-4 text-white">Modes</h2>
-        <div className="mb-6">
-          <h3 className="text-lg font-medium mb-3 text-blue-400">MODE 1</h3>
-          <div className="mb-4">
-            <label className="block text-gray-300 mb-2">Limitation Week</label>
-            <input 
-              type="text" 
-              value={weekLimit}
-              onChange={(e) => setWeekLimit(e.target.value)}
-              className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-blue-500 focus:outline-none"
-            />
+              <div className="bg-gray-800/50 rounded-lg p-6 backdrop-blur-sm">
+                <h2 className="text-2xl font-semibold mb-6 text-white">Initial Population Data</h2>
+                <div className="border-2 border-dashed border-gray-600 rounded-lg p-8 text-center hover:border-blue-500 transition-colors">
+                  <input
+                    type="file"
+                    accept=".csv"
+                    onChange={(e) => setFile(e.target.files?.[0] || null)}
+                    className="hidden"
+                    id="file-upload"
+                  />
+                  <label htmlFor="file-upload" className="cursor-pointer text-gray-300 hover:text-blue-400 flex flex-col items-center">
+                    <svg className="w-12 h-12 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                    </svg>
+                    <span>Drop CSV file here or click to upload</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column */}
+            <div className="flex-1 min-w-[400px]">
+              <div className="bg-gray-800/50 rounded-lg p-6 backdrop-blur-sm">
+                <h2 className="text-2xl font-semibold mb-6 text-white">Simulation Modes</h2>
+                
+                <div className="space-y-8">
+                  <div className="p-4 bg-gray-700/30 rounded-lg">
+                    <h3 className="text-xl font-medium mb-4 text-blue-400">Mode 1: Time Limitation</h3>
+                    <div>
+                      <label className="block text-gray-300 mb-2 text-sm">Limitation Week</label>
+                      <input 
+                        type="text" 
+                        value={weekLimit}
+                        onChange={(e) => setWeekLimit(e.target.value)}
+                        className="w-full p-3 rounded-lg bg-gray-700/50 text-white border border-gray-600 focus:border-blue-500 focus:outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="p-4 bg-gray-700/30 rounded-lg">
+                    <h3 className="text-xl font-medium mb-4 text-blue-400">Mode 2: Temperature Control</h3>
+                    <div>
+                      <label className="block text-gray-300 mb-2 text-sm">Target Average Temperature: {targetTemp}°C</label>
+                      <input 
+                        type="range" 
+                        min="0" 
+                        max="30" 
+                        step="0.1"
+                        value={targetTemp}
+                        onChange={(e) => setTargetTemp(e.target.value)}
+                        className="w-full h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex justify-end gap-4 mt-8">
+            <button 
+              className="px-8 py-3 rounded-lg bg-gray-700 text-white hover:bg-gray-600 transition-colors"
+              onClick={() => window.history.back()}
+            >
+              Cancel
+            </button>
+            <button className="px-8 py-3 rounded-lg bg-blue-600 text-white hover:bg-blue-500 transition-colors">
+              Launch Simulation
+            </button>
           </div>
         </div>
-        <div className="mb-6">
-          <h3 className="text-lg font-medium mb-3 text-blue-400">MODE 2</h3>
-          <div className="mb-4">
-            <label className="block text-gray-300 mb-2">Target Average Temperature: {targetTemp}°C</label>
-            <input 
-              type="range" 
-              min="0" 
-              max="30" 
-              step="0.1"
-              value={targetTemp}
-              onChange={(e) => setTargetTemp(e.target.value)}
-              className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
-            />
-          </div>
-        </div>
-      </div>
-
-      <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-        <h2 className="text-xl font-semibold mb-4 text-white">Initial Population Data</h2>
-        <div className="border-2 border-dashed border-gray-600 rounded-lg p-8 text-center">
-          <input
-            type="file"
-            accept=".csv"
-            onChange={(e) => setFile(e.target.files?.[0] || null)}
-            className="hidden"
-            id="file-upload"
-          />
-          <label htmlFor="file-upload" className="cursor-pointer text-gray-300 hover:text-blue-400">
-            Click to add file (CSV only)
-          </label>
-        </div>
-      </div>
-
-      <div className="flex justify-end gap-4">
-        <button 
-          className="px-6 py-2 rounded bg-gray-600 text-white hover:bg-gray-700 transition-colors"
-          onClick={() => window.history.back()}
-        >
-          Cancel
-        </button>
-        <button className="px-6 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 transition-colors">
-          Launch
-        </button>
       </div>
     </div>
   );
