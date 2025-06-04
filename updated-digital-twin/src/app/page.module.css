@@ -135,3 +135,39 @@
 .detailButton:hover {
   transform: translateY(-2px);
 }
+
+.quickLinks {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: rgba(17, 24, 39, 0.7);
+  border-radius: 8px;
+}
+
+.simulationLinks {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.simulationLink {
+  padding: 1rem;
+  background: rgba(31, 41, 55, 0.7);
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.simulationLink:hover {
+  background: rgba(55, 65, 81, 0.7);
+  transform: translateY(-2px);
+}
+
+.simulationLink h3 {
+  color: #E5E7EB;
+  margin-bottom: 0.5rem;
+}
+
+.simulationLink p {
+  color: #9CA3AF;
+  font-size: 0.9rem;
+}
