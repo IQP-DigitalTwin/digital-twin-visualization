@@ -1,18 +1,24 @@
 "use client";
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Sidebar from '../components/Sidebar';
 
 export default function NewSimulation() {
+  const router = useRouter();
   const [simName, setSimName] = useState('');
   const [targetPopulation, setTargetPopulation] = useState('26000');
   const [weekLimit, setWeekLimit] = useState('07');
   const [targetTemp, setTargetTemp] = useState('12.8');
   const [file, setFile] = useState<File | null>(null);
 
+  const handleLaunchSimulation = () => {
+    router.push(`/simulation-results?name=${encodeURIComponent(simName)}&population=${targetPopulation}`);
+  };
+
   return (
     <div className="flex min-h-screen bg-gray-900">
       <Sidebar />
-      <div className="flex-1 p-8 ml-64"> {/* ml-64 accounts for sidebar width */}
+      <div className="flex-1 p-8 ml-64"> {}
         <div className="max-w-7xl mx-auto">
           <h1 className="text-4xl font-bold mb-12 text-white border-b border-gray-700 pb-4">
             Create New Simulation
@@ -73,9 +79,9 @@ export default function NewSimulation() {
                 
                 <div className="space-y-8">
                   <div className="p-4 bg-gray-700/30 rounded-lg">
-                    <h3 className="text-xl font-medium mb-4 text-blue-400">Mode 1: Time Limitation</h3>
+                    <h3 className="text-xl font-medium mb-4 text-blue-400">Mode 1: Time Limitation (Get rid of later)</h3>
                     <div>
-                      <label className="block text-gray-300 mb-2 text-sm">Limitation Week</label>
+                      <label className="block text-gray-300 mb-2 text-sm">Limitation Week </label>
                       <input 
                         type="text" 
                         value={weekLimit}
@@ -86,7 +92,7 @@ export default function NewSimulation() {
                   </div>
 
                   <div className="p-4 bg-gray-700/30 rounded-lg">
-                    <h3 className="text-xl font-medium mb-4 text-blue-400">Mode 2: Temperature Control</h3>
+                    <h3 className="text-xl font-medium mb-4 text-blue-400">Mode 2: Temperature Control (Get rid of later)</h3>
                     <div>
                       <label className="block text-gray-300 mb-2 text-sm">Target Average Temperature: {targetTemp}°C</label>
                       <input 
@@ -112,7 +118,10 @@ export default function NewSimulation() {
             >
               Cancel
             </button>
-            <button className="px-8 py-3 rounded-lg bg-blue-600 text-white hover:bg-blue-500 transition-colors">
+            <button 
+              className="px-8 py-3 rounded-lg bg-blue-600 text-white hover:bg-blue-500 transition-colors"
+              onClick={handleLaunchSimulation}
+            >
               Launch Simulation
             </button>
           </div>
