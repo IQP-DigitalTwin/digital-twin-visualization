@@ -10,8 +10,23 @@ export default function NewSimulation() {
   const [weekLimit, setWeekLimit] = useState('07');
   const [targetTemp, setTargetTemp] = useState('12.8');
   const [file, setFile] = useState<File | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleLaunchSimulation = () => {
+  const handleLaunchSimulation = async () => {
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate delay
+      throw new Error("Failed to initialize simulation. Please check your parameters and try again.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "An unexpected error occurred");
+      return;
+    } finally {
+      setIsLoading(false);
+    }
+    
     router.push(`/simulation-results?name=${encodeURIComponent(simName)}&population=${targetPopulation}`);
   };
 
@@ -111,19 +126,37 @@ export default function NewSimulation() {
             </div>
           </div>
 
-          <div className="flex justify-end gap-4 mt-8">
-            <button 
-              className="px-8 py-3 rounded-lg bg-gray-700 text-white hover:bg-gray-600 transition-colors"
-              onClick={() => window.history.back()}
-            >
-              Cancel
-            </button>
-            <button 
-              className="px-8 py-3 rounded-lg bg-blue-600 text-white hover:bg-blue-500 transition-colors"
-              onClick={handleLaunchSimulation}
-            >
-              Launch Simulation
-            </button>
+          <div className="flex flex-col gap-4 mt-8">
+            {error && (
+              <div className="p-4 bg-red-500/10 border border-red-500 rounded-lg text-red-500">
+                {error}
+              </div>
+            )}
+            <div className="flex justify-end gap-4">
+              <button 
+                className="px-8 py-3 rounded-lg bg-gray-700 text-white hover:bg-gray-600 transition-colors"
+                onClick={() => window.history.back()}
+                disabled={isLoading}
+              >
+                Cancel
+              </button>
+              <button 
+                className={`px-8 py-3 rounded-lg bg-blue-600 text-white flex items-center justify-center min-w-[160px] ${
+                  isLoading ? 'opacity-75 cursor-not-allowed' : 'hover:bg-blue-500'
+                } transition-colors`}
+                onClick={handleLaunchSimulation}
+                disabled={isLoading}
+              >
+                {isLoading ? (
+                  <>
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3"></div>
+                    Loading...
+                  </>
+                ) : (
+                  'Launch Simulation'
+                )}
+              </button>
+            </div>
           </div>
         </div>
       </div>
