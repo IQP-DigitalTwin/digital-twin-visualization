@@ -11,11 +11,10 @@ export default function NewSimulation() {
 	const [simDuration, setSimDuration] = useState(83);
 	const [simName, setSimName] = useState("");
 	const [targetPopulation, setTargetPopulation] = useState(26000);
-	const [file, setFile] = useState<File | null>(null);
 
 	const handleLaunchSimulation = () => {
 		console.log("submitting simulation");
-		let params: SimulationParameters = {
+		const params: SimulationParameters = {
 			name: simName,
 			duration: simDuration,
 			seed: 579,
@@ -23,6 +22,7 @@ export default function NewSimulation() {
 			id: uuidv4(),
 		};
 		createSimulation(params);
+        router.push("/simulations/" + params.id)
 	};
 
 	return (

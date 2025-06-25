@@ -1,3 +1,4 @@
+
 // Types for categorical data
 export type Supplier = string;
 export type Plan = string;
@@ -41,4 +42,10 @@ export interface SimulationParameters {
     seed: number;
 }
 
-export interface SimulationResults
+export interface SimulationResults {
+    id: string;
+    name: string;
+    status: string;
+    createdAt: Date;
+    parameters: SimulationParameters;
+}

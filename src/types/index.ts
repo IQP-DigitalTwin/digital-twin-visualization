@@ -1,3 +1,3 @@
-import { SimulationDataRow, ParsedSimulationData, SimulationParameters } from "./types";
+import { SimulationDataRow, ParsedSimulationData, SimulationParameters, SimulationResults } from "./types";
 
-export type { SimulationDataRow, ParsedSimulationData, SimulationParameters }
+export type { SimulationDataRow, ParsedSimulationData, SimulationParameters, SimulationResults }

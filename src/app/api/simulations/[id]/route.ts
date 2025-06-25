@@ -1,11 +1,12 @@
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 
 import fs, { promises } from "fs";
 
 export async function POST(
 	req: Request,
-	{ params: { id } }: { params: { id: string } }
+	context: {params: {id: string}}
 ) {
+    const { id } = context.params;
 	if (!id) {
 		return NextResponse.json<{ errors: unknown }>(
 			{
@@ -21,8 +22,14 @@ export async function POST(
 	const file = formData.get("file") as File;
 	const arrayBuffer = await file.arrayBuffer();
 	const buffer = new Uint8Array(arrayBuffer);
-
-	await promises.writeFile(`./public/files/simulations/${file.name}`, buffer);
+    const dir = "public/files/simulations/"+id
+    if(!fs.existsSync(dir)){
+        fs.mkdirSync(dir);
+    }
+	await promises.writeFile(`./public/files/simulations/${id}/${file.name}`, buffer);
 
 	return NextResponse.json("ok", { status: 200 });
+}
+
+export async function PUT(){   
 }

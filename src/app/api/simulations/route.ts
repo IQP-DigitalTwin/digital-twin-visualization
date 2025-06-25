@@ -1,14 +1,30 @@
-import SimulationResults from "@/app/simulation-results/page";
 import { getHostUrl, getRandomWorkersUrls } from "@/lib/env";
-import { SimulationParameters } from "@/types";
+import { SimulationParameters, SimulationResults } from "@/types";
+import { NextResponse } from "next/server";
+const simulationRepository: {[id: string]: SimulationResults} = {};
 
+async function createSimRepo(simulation: SimulationParameters): Promise<SimulationResults> {
+    if (simulation.id in simulationRepository){
+        throw new Error(`The simulation ${simulation.id} already exists`)
+    }
+
+    const simulationResults: SimulationResults = {
+        "id": simulation.id,
+        "name": simulation.name,
+        "parameters": simulation,
+        "status": "Created",
+        "createdAt": new Date()
+    }
+
+    return simulationResults;
+}
 
 export async function POST(req: Request){
     const body = await req.json();
-    const simulation: SimulationParameters = {
+    const newSimulation: SimulationParameters = {
         ...body
     }
-
+    const simulation = await createSimRepo(newSimulation)
     try{
         const workerURL = getRandomWorkersUrls();
         console.log("workerURL: ", workerURL);
@@ -22,9 +38,11 @@ export async function POST(req: Request){
         if (!res.ok) {
             throw new Error("Worker request error");
         }
-
     } catch (e) {
-        return 500;
+        return e;
     }
-    return NextResponse.json<{new: };
+    return NextResponse.json<{new: SimulationResults}>(
+        {new: simulation},
+        {status: 200}
+    );
 }

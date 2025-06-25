@@ -20,3 +20,8 @@ export async function createSimulation(
 
     return json.new;
 }
+
+export async function getSimulationRepositorybyID(id: string) {
+    const file = await fetch("/files/simulations/" + id)
+    return file;
+}
