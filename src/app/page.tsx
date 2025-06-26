@@ -1,69 +1,60 @@
-"use client";
-import { useState, useEffect } from "react";
+import Link from "next/link";
 import Sidebar from "../components/Sidebar";
 import styles from "./page.module.css";
-import { useRouter } from "next/navigation";
-
-interface CSVData {
-	week: string;
-	population: string;
-}
 
 export default function Home() {
-	const router = useRouter();
 
 	return (
 		<div className={styles.container}>
-			<Sidebar />
+            <Sidebar />
 			<main className={styles.mainContent}>
 				<h1>Digital Twin Dashboard</h1>
-
-				<button
+				<Link
 					className={styles.newSimulationBtn}
-					onClick={() => router.push("/newsimulation")}
+					href={"/newsimulation"}
 				>
 					New Simulation
-				</button>
+				</Link>
 
 				<div className={styles.dashboardGrid}>
-					<div
-						className={`${styles.dashboardCard} ${styles.clickable}`}
-						onClick={() => router.push("/active-simulations")}
-					>
-						<h2>Active Simulations</h2>
-						<p>
-							View and manage your running digital twin
-							simulations
-						</p>
-					</div>
-					<div
-						className={`${styles.dashboardCard} ${styles.clickable}`}
-						onClick={() => router.push("/pre-run-simulations")}
-					>
-						<h2>Pre-Run Simulations</h2>
-						<p>
-							View comprehensive analysis of completed simulation
-							scenarios
-						</p>
-					</div>
-					<div
-						className={`${styles.dashboardCard} ${styles.clickable}`}
-						onClick={() => router.push("/map-visualization")}
-					>
-						<h2>Map Visualizations</h2>
-						<p>
-							Explore geospatial data visualization and analysis
-						</p>
-					</div>
-					<div
-						className={`${styles.dashboardCard} ${styles.clickable}`}
-						onClick={() => router.push("/what-if-scenarios")}
-					>
-						<h2>What-If Scenarios</h2>
-						<p>
-							Create and analyze predictive simulation scenarios
-						</p>
-					</div>
+                    <Link
+                        href="/active-simulations"
+                        className={`${styles.dashboardCard} ${styles.clickable}`}
+                    >
+                        <h2>Active Simulations</h2>
+                        <p>
+                            View and manage your running digital twin
+                            simulations
+                        </p>
+                    </Link>
+                    <Link
+                        href="/pre-run-simulations"
+                        className={`${styles.dashboardCard} ${styles.clickable}`}
+                    >
+                        <h2>Pre-Run Simulations</h2>
+                        <p>
+                            View comprehensive analysis of completed simulation
+                            scenarios
+                        </p>
+                    </Link>
+                    <Link
+                        href="/map-visualization"
+                        className={`${styles.dashboardCard} ${styles.clickable}`}
+                    >
+                        <h2>Map Visualizations</h2>
+                        <p>
+                            Explore geospatial data visualization and analysis
+                        </p>
+                    </Link>
+                    <Link
+                        href="/what-if-scenarios"
+                        className={`${styles.dashboardCard} ${styles.clickable}`}
+                    >
+                        <h2>What-If Scenarios</h2>
+                        <p>
+                            Create and analyze predictive simulation scenarios
+                        </p>
+                    </Link>
 				</div>
 			</main>
 		</div>

@@ -1,77 +1,97 @@
-"use client"
+"use client";
 import React, { useRef, useEffect, useState } from "react";
 import * as d3 from "d3";
+import { SimulationAgentRow } from "@/types";
 
 interface MapProps {
-	width: number;
-	height: number;
+	data: SimulationAgentRow[];
 }
 
-const D3Map: React.FC<MapProps> = ({ width, height }) => {
+const D3Map: React.FC<MapProps> = ({ data }) => {
 	const svgRef = useRef<SVGSVGElement | null>(null);
 	const tooltipRef = useRef<HTMLDivElement | null>(null);
+	const containerRef = useRef<HTMLDivElement | null>(null);
+
 	const [geojsonData, setGeojsonData] =
 		useState<d3.GeoPermissibleObjects | null>(null);
 	const [dataCounts, setDataCounts] = useState<Map<string, number> | null>(
 		null
-	); // Map to store code -> count
+	);
 	const [hoveredProperties, setHoveredProperties] = useState<any | null>(
 		null
 	);
+	const [dimensions, setDimensions] = useState<{ width: number; height: number }>({
+		width: 800,
+		height: 800,
+	});
+
+	// Resize observer to update dimensions
+	useEffect(() => {
+		const handleResize = () => {
+			if (containerRef.current) {
+				const rect = containerRef.current.getBoundingClientRect();
+				setDimensions({
+					width: rect.width,
+					height: rect.height,
+				});
+			}
+		};
+		handleResize();
+
+		const resizeObserver = new window.ResizeObserver(handleResize);
+		if (containerRef.current) {
+			resizeObserver.observe(containerRef.current);
+		}
+		return () => {
+			resizeObserver.disconnect();
+		};
+	}, []);
 
 	useEffect(() => {
-		// Load GeoJSON and CSV data concurrently
-		Promise.all([
-			d3.json("/departements.geojson"), // Path to your GeoJSON
-			d3.csv("/populations/test.csv"), // Path to your CSV
-		])
-			.then(([geoJson, csvData]) => {
+		d3.json("/departements.geojson")
+			.then((geoJson) => {
 				setGeojsonData(geoJson as d3.GeoPermissibleObjects);
-
-				// Process CSV data to get counts
-				const counts = new Map<string, number>();
-				csvData.forEach((row: any) => {
-					const code = row.CP.slice(0,2); // Assuming your CSV has a 'code' column
-					if (code && row.time == 0) {
-						counts.set(code, (counts.get(code) || 0) + 1);
-					}
-				});
-				setDataCounts(counts);
 			})
 			.catch((error) => {
-				console.error("Error loading data:", error);
+				console.error("Error loading GeoJSON:", error);
 			});
 	}, []);
 
 	useEffect(() => {
-		if (!geojsonData || !dataCounts || !svgRef.current) return;
+		if (!data) return;
+		const counts = new Map<string, number>();
+		data.forEach((row: SimulationAgentRow) => {
+			const code = String(row.CP).slice(0, 2);
+			if (code) {
+				counts.set(code, (counts.get(code) || 0) + 1);
+			}
+		});
+		setDataCounts(counts);
+	}, [data]);
+
+	useEffect(() => {
+		const { width, height } = dimensions;
+		if (!geojsonData || !dataCounts || !svgRef.current || width === 0 || height === 0) return;
 
 		const svg = d3.select(svgRef.current);
-
-		// Clear any existing elements before drawing
 		svg.selectAll("g").remove();
 
-		// Define projection
 		const projection = d3
 			.geoMercator()
 			.fitSize([width, height], geojsonData);
 
-		// Define path generator
 		const path = d3.geoPath().projection(projection);
 
-		// Group for map features and labels
 		const mapGroup = svg.append("g");
 
-		// Draw map features
 		mapGroup
 			.selectAll("path")
-			.data(geojsonData.features)
+			.data((geojsonData as any).features)
 			.join("path")
 			.attr("d", path as any)
 			.attr("fill", (d: any) => {
 				const code = d.properties.code;
 				const count = dataCounts.get(code) || 0;
-				// Simple color scale: darker for higher count
 				return d3.interpolateBlues(
 					count / d3.max(Array.from(dataCounts.values()) || [1])!
 				);
@@ -81,7 +101,7 @@ const D3Map: React.FC<MapProps> = ({ width, height }) => {
 			.on("mouseover", function (event, d: any) {
 				const code = d.properties.code;
 				const count = dataCounts.get(code) || 0;
-				setHoveredProperties({ ...d.properties, count: count }); // Add count to properties
+				setHoveredProperties({ ...d.properties, count: count });
 
 				const [x, y] = d3.pointer(event, svgRef.current);
 				const tooltip = d3.select(tooltipRef.current);
@@ -97,7 +117,6 @@ const D3Map: React.FC<MapProps> = ({ width, height }) => {
 
 				d3.select(tooltipRef.current).style("opacity", 0);
 
-				// Revert fill based on count
 				d3.select(this)
 					.attr("fill", (d: any) => {
 						const code = d.properties.code;
@@ -110,13 +129,11 @@ const D3Map: React.FC<MapProps> = ({ width, height }) => {
 					.attr("stroke-width", 1);
 			});
 
-		// Add text labels for counts
 		mapGroup
 			.selectAll("text")
-			.data(geojsonData.features)
+			.data((geojsonData as any).features)
 			.join("text")
 			.attr("transform", (d: any) => {
-				// Calculate centroid of the polygon for text positioning
 				const centroid = path.centroid(d);
 				return `translate(${centroid[0]},${centroid[1]})`;
 			})
@@ -124,18 +141,16 @@ const D3Map: React.FC<MapProps> = ({ width, height }) => {
 			.attr("alignment-baseline", "middle")
 			.style("font-size", "10px")
 			.style("fill", "#333")
-			.style("pointer-events", "none") // Important: allow mouse events to pass through to the polygon
+			.style("pointer-events", "none")
 			.text((d: any) => {
 				const code = d.properties.code;
-				return dataCounts.get(code) || "0"; // Display the count
+				return dataCounts.get(code) || "0";
 			});
-	}, [geojsonData, dataCounts, width, height]);
+	}, [geojsonData, dataCounts, dimensions]);
 
-	// Effect to update tooltip content when hoveredProperties changes
 	useEffect(() => {
 		const tooltip = d3.select(tooltipRef.current);
 		if (hoveredProperties) {
-			// Create a more readable display for the tooltip
 			let tooltipContent = "<strong>Properties:</strong><br/>";
 			for (const key in hoveredProperties) {
 				if (
@@ -151,8 +166,8 @@ const D3Map: React.FC<MapProps> = ({ width, height }) => {
 	}, [hoveredProperties]);
 
 	return (
-		<div style={{ position: "relative" }}>
-			<svg ref={svgRef} width={width} height={height}></svg>
+		<div ref={containerRef} style={{ position: "relative", width: "100%", height: "100%" }}>
+			<svg ref={svgRef} width={dimensions.width} height={dimensions.height}></svg>
 			<div
 				ref={tooltipRef}
 				style={{

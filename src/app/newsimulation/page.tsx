@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Sidebar from "../../components/Sidebar";
-import { createSimulation } from "@/lib/utils";
+import { createSimulation } from "@/lib/serverutils";
 import { SimulationParameters } from "@/types";
 import {v4 as uuidv4} from "uuid";
 

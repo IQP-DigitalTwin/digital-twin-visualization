@@ -49,3 +49,23 @@ export interface SimulationResults {
     createdAt: Date;
     parameters: SimulationParameters;
 }
+
+export interface SimulationAgentRow {
+    CP: string;
+    HABITAT: string;
+    Revenu: number;
+    age: number;
+    change_prob: number;
+    green_sensitivity: number;
+    id: number;
+    num_times_switched: number;
+    plan: string;
+    price_sensitivity: number;
+    satisfaction_threshold: number;
+    supplier: string;
+}
+
+export type SimulationPlanRow = {
+    time: number;
+    [key: string]: number; // All other columns are numbers
+};

@@ -27,7 +27,7 @@ interface AnalysisDataState {
 	stabilityPreference: ChartData;
 }
 
-export default function SimulationResults() {
+function SimulationResults() {
 	const searchParams = useSearchParams();
 	const simName = searchParams.get("name");
 	const population = searchParams.get("population");
