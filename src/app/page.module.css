@@ -1,173 +1,181 @@
 .container {
-  display: flex;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f3 100%);
+	display: flex;
+	min-height: 100vh;
+	background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f3 100%);
 }
 
 .mainContent {
-  flex: 1;
-  padding: 2rem;
-  color: #2d3748;
+	flex: 1;
+	padding: 2rem;
+	color: #2d3748;
 }
 
 .mainContent h1 {
-  color: #2d3748;
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
+	color: #2d3748;
+	font-size: 2.5rem;
+	margin-bottom: 2rem;
 }
 
 .newSimulationBtn {
-  padding: 12px 24px;
-  border: none;
-  border-radius: 8px;
-  background: linear-gradient(90deg, #4299e1 0%, #3182ce 100%);
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.2s;
-  box-shadow: 0 4px 6px rgba(66, 153, 225, 0.2);
+	padding: 12px 24px;
+	border: none;
+	border-radius: 8px;
+	background: linear-gradient(90deg, #4299e1 0%, #3182ce 100%);
+	color: white;
+	font-weight: bold;
+	cursor: pointer;
+	transition: all 0.2s;
+	box-shadow: 0 4px 6px rgba(66, 153, 225, 0.2);
 }
 
 .newSimulationBtn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 8px rgba(66, 153, 225, 0.3);
+	transform: translateY(-2px);
+	box-shadow: 0 6px 8px rgba(66, 153, 225, 0.3);
 }
 
 .dashboardGrid {
-  display: flex;
-  gap: 2rem;
-  margin-top: 2rem;
+	display: flex;
+	gap: 2rem;
+	margin-top: 2rem;
 }
 
 .dashboardCard {
-  flex: 1;
-  background: white;
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  transition: all 0.2s;
-  border: 1px solid rgba(226, 232, 240, 0.8);
+	flex: 1;
+	background: white;
+	border-radius: 12px;
+	padding: 1.5rem;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+	transition: all 0.2s;
+	border: 1px solid rgba(226, 232, 240, 0.8);
 }
 
 .dashboardCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+	transform: translateY(-5px);
+	box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
 }
 
 .dashboardCard h2 {
-  color: #2d3748;
-  margin-bottom: 1rem;
+	color: #2d3748;
+	margin-bottom: 1rem;
 }
 
 .dashboardCard p {
-  color: #718096;
-  line-height: 1.5;
+	color: #718096;
+	line-height: 1.5;
 }
 
 .clickable {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .clickable:hover {
-  transform: translateY(-5px);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.1) 100%);
+	transform: translateY(-5px);
+	background: linear-gradient(
+		135deg,
+		rgba(255, 255, 255, 0.15) 0%,
+		rgba(255, 255, 255, 0.1) 100%
+	);
 }
 
 .comingSoon {
-  text-align: center;
-  padding: 3rem;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
-  margin-top: 2rem;
+	text-align: center;
+	padding: 3rem;
+	background: linear-gradient(
+		135deg,
+		rgba(255, 255, 255, 0.1) 0%,
+		rgba(255, 255, 255, 0.05) 100%
+	);
+	border-radius: 12px;
+	backdrop-filter: blur(10px);
+	margin-top: 2rem;
 }
 
 .comingSoon h2 {
-  color: #00b4db;
-  margin-bottom: 1rem;
+	color: #00b4db;
+	margin-bottom: 1rem;
 }
 
 .comingSoon p {
-  color: #e0e0e0;
+	color: #e0e0e0;
 }
 
 .simulationsList {
-  margin-top: 2rem;
-  background: rgba(30, 41, 59, 0.5);
-  border: 1px solid rgba(148, 163, 184, 0.1);
-  border-radius: 12px;
-  overflow: hidden;
+	margin-top: 2rem;
+	background: rgba(30, 41, 59, 0.5);
+	border: 1px solid rgba(148, 163, 184, 0.1);
+	border-radius: 12px;
+	overflow: hidden;
 }
 
 .simulationHeader {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  padding: 1rem;
-  background: rgba(30, 41, 59, 0.8);
-  border-bottom: 1px solid rgba(148, 163, 184, 0.1);
-  font-weight: 500;
-  color: rgb(148, 163, 184);
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	padding: 1rem;
+	background: rgba(30, 41, 59, 0.8);
+	border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+	font-weight: 500;
+	color: rgb(148, 163, 184);
 }
 
 .simulationRow {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  padding: 1rem;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.1);
-  color: rgb(226, 232, 240);
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	padding: 1rem;
+	border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+	color: rgb(226, 232, 240);
 }
 
 .simulationRow:hover {
-  background: rgba(30, 41, 59, 0.3);
+	background: rgba(30, 41, 59, 0.3);
 }
 
 .detailButton {
-  padding: 8px 16px;
-  background: linear-gradient(90deg, #00b4db 0%, #0083b0 100%);
-  border: none;
-  border-radius: 6px;
-  color: white;
-  cursor: pointer;
-  transition: transform 0.2s;
-  width: fit-content;
+	padding: 8px 16px;
+	background: linear-gradient(90deg, #00b4db 0%, #0083b0 100%);
+	border: none;
+	border-radius: 6px;
+	color: white;
+	cursor: pointer;
+	transition: transform 0.2s;
+	width: fit-content;
 }
 
 .detailButton:hover {
-  transform: translateY(-2px);
+	transform: translateY(-2px);
 }
 
 .quickLinks {
-  margin-top: 2rem;
-  padding: 1.5rem;
-  background: rgba(17, 24, 39, 0.7);
-  border-radius: 8px;
+	margin-top: 2rem;
+	padding: 1.5rem;
+	background: rgba(17, 24, 39, 0.7);
+	border-radius: 8px;
 }
 
 .simulationLinks {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 1rem;
+	margin-top: 1rem;
 }
 
 .simulationLink {
-  padding: 1rem;
-  background: rgba(31, 41, 55, 0.7);
-  border-radius: 6px;
-  transition: all 0.2s ease;
+	padding: 1rem;
+	background: rgba(31, 41, 55, 0.7);
+	border-radius: 6px;
+	transition: all 0.2s ease;
 }
 
 .simulationLink:hover {
-  background: rgba(55, 65, 81, 0.7);
-  transform: translateY(-2px);
+	background: rgba(55, 65, 81, 0.7);
+	transform: translateY(-2px);
 }
 
 .simulationLink h3 {
-  color: #E5E7EB;
-  margin-bottom: 0.5rem;
+	color: #e5e7eb;
+	margin-bottom: 0.5rem;
 }
 
 .simulationLink p {
-  color: #9CA3AF;
-  font-size: 0.9rem;
+	color: #9ca3af;
+	font-size: 0.9rem;
 }
