@@ -1,12 +1,13 @@
 import { NextResponse } from "next/server";
 import fs, { promises } from "fs";
 import { updateSimulationStatus } from "@/lib/serverutils";
+import { revalidatePath } from "next/cache";
 
 export async function POST(
     req: Request,
     { params }: { params: { id: string } }
 ) {
-    const { id } = params;
+    const { id } = await params;
     if (!id) {
         return NextResponse.json<{ errors: unknown }>(
             {
@@ -30,6 +31,8 @@ export async function POST(
 
     // Update simulation status to "Done"
     await updateSimulationStatus(id, "Done");
+
+    revalidatePath("/simulations/" + id);
 
     return NextResponse.json("ok", { status: 200 });
 }

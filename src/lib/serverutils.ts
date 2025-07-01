@@ -3,6 +3,7 @@ import { SimulationParameters, SimulationAgentRow, SimulationPlanRow } from "@/t
 import { SimulationResults } from "@/types";
 import * as d3 from "d3-dsv";
 import fs from "fs/promises";
+import { existsSync } from "fs";
 import path from "path";
 import { getHostUrl } from "./env";
 
@@ -12,7 +13,7 @@ const SIM_DB_PATH = path.join(
 );
 const SIM_PATH = path.resolve(process.cwd(), "public/files/simulations");
 
-export async function readSimulations() {
+export async function readSimulations(): Promise<SimulationResults[]> {
     try {
         const data = await fs.readFile(SIM_DB_PATH, "utf-8");
         return JSON.parse(data);
@@ -65,9 +66,24 @@ export async function writeSimulations(sims: SimulationResults[]) {
     }
 }
 
+export async function deleteSimulation(id: string) {
+    try {
+        const sims = await readSimulations();
+        const updatedSims = sims.filter(sim => sim.id !== id);
+        await writeSimulations(updatedSims);
+
+        const simDir = path.join(SIM_PATH, id);
+        if (existsSync(simDir)) {
+            await fs.rm(simDir, { recursive: true, force: true });
+        }
+    } catch (err) {
+        console.error("Error deleting simulation:", err);
+    }
+}
+
 export async function createSimulation(
 	newSimulation: SimulationParameters
-): Promise<File> {
+) {
 	const res = await fetch(`${getHostUrl()}/api/simulations`, {
 		method: "POST",
 		headers: {

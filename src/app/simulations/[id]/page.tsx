@@ -1,27 +1,35 @@
-import AgentTable from "@/components/AgentTable";
+import { DataTable } from "@/components/agenttable/agent-table";
+import { columns } from "@/components/agenttable/columns";
 import D3Map from "@/components/D3Map";
 import D3PlansPlot from "@/components/D3PlansPlot";
-import Sidebar from "@/components/Sidebar";
-import { readSimulationAgents, readSimulationPlans, readSimulationResult } from "@/lib/serverutils";
+import {
+	readSimulationAgents,
+	readSimulationPlans,
+	readSimulationResult,
+} from "@/lib/serverutils";
+import { SimulationPlanRow } from "@/types";
 
 export default async function Simulations({
 	params,
 }: {
 	params: { id: string };
 }) {
-	const slug = params.id;
-	const simulationResult = slug ? await readSimulationResult(slug) : null;
+	const idslug = await params;
+	const slug = idslug.id;
+	const simulationResult = slug
+		? await readSimulationResult(slug)
+		: { status: "Created" };
 	const agentData =
 		simulationResult?.status == "Done"
 			? await readSimulationAgents(slug)
 			: [];
-    let plansData: any[] = [];
-    let planColumns: string[] = [];
-    if (simulationResult?.status == "Done") {
-        const plansResult = await readSimulationPlans(slug);
-        plansData = plansResult.data;
-        planColumns = plansResult.columns;
-    }
+	let plansData: SimulationPlanRow[] = [];
+	let planColumns: string[] = [];
+	if (simulationResult?.status == "Done") {
+		const plansResult = await readSimulationPlans(slug);
+		plansData = plansResult.data;
+		planColumns = plansResult.columns;
+	}
 
 	if (simulationResult?.status === "Created") {
 		const { Suspense } = await import("react");
@@ -36,12 +44,17 @@ export default async function Simulations({
 		);
 	}
 	return (
-		<div className="flex flex-row">
-			<Sidebar />
-			<div className="flex flex-col grow min-h-screen justify-center p-10">
-				<D3Map data={agentData}></D3Map>
-                <D3PlansPlot data={plansData} columns={planColumns} width={1000} height={800}/>
-                <AgentTable data={agentData}/>
+		<div className="flex flex-col grow">
+			<div className="flex flex-row grow">
+                <div className="flex flex-col grow">
+                    <D3Map data={agentData}></D3Map>
+                </div>
+                <div className="flex flex-col grow justify-center items-center">
+                    <D3PlansPlot data={plansData} columns={planColumns}/>
+                </div>
+			</div>
+			<div className="flex flex-col w-full justify-center items-center">
+				{/* <DataTable columns={columns} data={agentData} /> */}
 			</div>
 		</div>
 	);

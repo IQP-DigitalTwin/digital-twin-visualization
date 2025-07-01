@@ -39,6 +39,10 @@ export interface SimulationParameters {
     name: string;
     final_population_number: number;
     duration: number;
+    future_duration: number;
+    future_trv_z: number;
+    env_weight: number;
+    w2s_mult: number;
     seed: number;
 }
 

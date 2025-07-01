@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import { SimulationPlanRow } from "@/types";
 
@@ -20,6 +20,34 @@ const D3PlansPlot: React.FC<D3PlansPlotProps> = ({
 }) => {
     const svgRef = useRef<SVGSVGElement | null>(null);
     const tooltipRef = useRef<HTMLDivElement | null>(null);
+    const containerRef = useRef<HTMLDivElement | null>(null);
+
+    // Responsive dimensions
+    const [dimensions, setDimensions] = useState<{ width: number; height: number }>({
+        width,
+        height,
+    });
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (containerRef.current) {
+                const rect = containerRef.current.getBoundingClientRect();
+                setDimensions({
+                    width: rect.width,
+                    height: rect.height,
+                });
+            }
+        };
+        handleResize();
+
+        const resizeObserver = new window.ResizeObserver(handleResize);
+        if (containerRef.current) {
+            resizeObserver.observe(containerRef.current);
+        }
+        return () => {
+            resizeObserver.disconnect();
+        };
+    }, []);
 
     // Find the columns we care about
     const s_EDF_p_TRV = columns.find(col => col === "s_EDF_p_TRV");
@@ -58,6 +86,8 @@ const D3PlansPlot: React.FC<D3PlansPlotProps> = ({
     useEffect(() => {
         if (!data.length || !series.length || !svgRef.current) return;
 
+        const width = dimensions.width || 800;
+        const height = dimensions.height || 400;
         const margin = { top: 30, right: 30, bottom: 40, left: 60 };
         const innerWidth = width - margin.left - margin.right;
         const innerHeight = height - margin.top - margin.bottom;
@@ -171,11 +201,15 @@ const D3PlansPlot: React.FC<D3PlansPlotProps> = ({
             .attr("text-anchor", "middle")
             .style("font-size", "14px")
             .text("Number of Households");
-    }, [data, series, width, height]);
+    }, [data, series, dimensions]);
 
     return (
-        <div className="w-full flex justify-center items-center" style={{ position: "relative" }}>
-            <svg ref={svgRef} width={width} height={height} />
+        <div
+            ref={containerRef}
+            className="flex justify-center items-center"
+            style={{ position: "relative" }}
+        >
+            <svg ref={svgRef} width={dimensions.width} height={dimensions.height} />
             <div
                 ref={tooltipRef}
                 style={{

@@ -166,7 +166,7 @@ const D3Map: React.FC<MapProps> = ({ data }) => {
 	}, [hoveredProperties]);
 
 	return (
-		<div ref={containerRef} style={{ position: "relative", width: "100%", height: "100%" }}>
+		<div ref={containerRef} className="" style={{ position: "relative"}}>
 			<svg ref={svgRef} width={dimensions.width} height={dimensions.height}></svg>
 			<div
 				ref={tooltipRef}

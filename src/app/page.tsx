@@ -1,12 +1,10 @@
 import Link from "next/link";
-import Sidebar from "../components/Sidebar";
 import styles from "./page.module.css";
 
 export default function Home() {
 
 	return (
-		<div className={styles.container}>
-            <Sidebar />
+		<div className="flex min-h-full">
 			<main className={styles.mainContent}>
 				<h1>Digital Twin Dashboard</h1>
 				<Link

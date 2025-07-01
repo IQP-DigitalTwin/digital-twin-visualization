@@ -29,15 +29,24 @@ export async function POST(req: Request) {
 				body: JSON.stringify(simulation),
 			}
 		);
+        //This will fail if there is no worker response from worker URL!!!!
 		if (!res.ok) {
 			throw new Error("Worker request error");
 		}
 	} catch (e) {
-		return e;
+        console.error("Error in simulation POST:", e);
+        // If the worker request fails, we still want to save the simulation with status "Created"
+        simulation.status = "Created";
+		return NextResponse.json(
+			{ error: e instanceof Error ? e.message : String(e) },
+			{ status: 500 }
+		);
 	}
+
 	const sims = await readSimulations();
 	sims.push(simulation);
 	await writeSimulations(sims);
+
 	return NextResponse.json<{ new: SimulationResults }>(
 		{ new: simulation },
 		{ status: 200 }
