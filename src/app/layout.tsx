@@ -17,7 +17,7 @@ export default function RootLayout({
 		<html lang="en">
 			<body>
                 <Navbar/>
-                <div className="flex min-h-full justify-center items-center grow px-20">
+                <div className="flex min-h-screen grow px-10 lg:px-20">
                     {children}
                 </div>
 			</body>

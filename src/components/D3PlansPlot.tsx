@@ -15,7 +15,7 @@ const COLORS = d3.schemeCategory10;
 const D3PlansPlot: React.FC<D3PlansPlotProps> = ({
     data,
     columns,
-    width = 800,
+    width = 600,
     height = 400,
 }) => {
     const svgRef = useRef<SVGSVGElement | null>(null);
@@ -204,12 +204,10 @@ const D3PlansPlot: React.FC<D3PlansPlotProps> = ({
     }, [data, series, dimensions]);
 
     return (
-        <div
-            ref={containerRef}
-            className="flex justify-center items-center"
-            style={{ position: "relative" }}
+        <div ref={containerRef}
+            className="flex grow w-full h-full"
         >
-            <svg ref={svgRef} width={dimensions.width} height={dimensions.height} />
+            <svg ref={svgRef} className="w-full h-full" />
             <div
                 ref={tooltipRef}
                 style={{

@@ -1,13 +1,14 @@
 import { DataTable } from "@/components/agenttable/agent-table";
 import { columns } from "@/components/agenttable/columns";
-import D3Map from "@/components/D3Map";
-import D3PlansPlot from "@/components/D3PlansPlot";
+import D3AgeDistributionPlot from "@/components/D3AgeDistributionPlot";
+import SimulationStatusPoller from "@/components/SimulationStatusPoller";
 import {
 	readSimulationAgents,
 	readSimulationPlans,
 	readSimulationResult,
 } from "@/lib/serverutils";
 import { SimulationPlanRow } from "@/types";
+import MapContainer from "@/components/MapContainer";
 
 export default async function Simulations({
 	params,
@@ -31,30 +32,26 @@ export default async function Simulations({
 		planColumns = plansResult.columns;
 	}
 
-	if (simulationResult?.status === "Created") {
-		const { Suspense } = await import("react");
+	if (simulationResult?.status !== "Done") {
 		return (
-			<div className="flex flex-row min-h-screen justify-center p-10">
-				<Suspense>
-					<div className="w-full flex items-center justify-center">
-						<span className="text-lg">Loading simulation...</span>
-					</div>
-				</Suspense>
+			<div className="flex flex-col grow items-center justify-center">
+				<SimulationStatusPoller simulationId={slug} />
 			</div>
 		);
 	}
 	return (
-		<div className="flex flex-col grow">
-			<div className="flex flex-row grow">
-                <div className="flex flex-col grow">
-                    <D3Map data={agentData}></D3Map>
-                </div>
-                <div className="flex flex-col grow justify-center items-center">
-                    <D3PlansPlot data={plansData} columns={planColumns}/>
-                </div>
+		<div className="flex flex-col grow p-10 space-y-5">
+			<div className="text-3xl">Simulation Results</div>
+			<div className="grid grid-cols-1 lg:grid-cols-2 grow gap-5 lg:space-y-0 h-1/2">
+				<div className="flex flex-col w-full border-2 rounded-md p-5">
+					<MapContainer agentData={agentData} />
+				</div>
+				<div className="flex flex-col grow border-2 rounded-md py-20">
+					<D3AgeDistributionPlot data={agentData} />
+				</div>
 			</div>
-			<div className="flex flex-col w-full justify-center items-center">
-				{/* <DataTable columns={columns} data={agentData} /> */}
+			<div className="flex flex-col border-2 rounded-md overflow-auto">
+				<DataTable columns={columns} data={agentData} />
 			</div>
 		</div>
 	);
